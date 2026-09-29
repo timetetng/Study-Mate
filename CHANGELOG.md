@@ -1,5 +1,27 @@
 # 更新日志
 
+<!-- studymate-release:v0.3.0 -->
+## [0.3.0](https://github.com/timetetng/Study-Mate/releases/tag/v0.3.0) - 2026-09-29
+
+### 自用 fork：本地资料 OCR + 检索索引
+
+- feat(material-retrieval)：新增「本地资料检索协议」skill——本地资料分层（digital 转 md / scan 走 OCR），
+  按 `reference/INDEX/` 把问题映射到原文章节/行号/页码，并溯源回原始出处
+- feat(build_material_index.py)：新增本地资料检索索引构建脚本，产出 `reference/INDEX/`
+  （library／toc／lines／terms／offsets），对齐手机侧 math-ocr 索引形态
+- feat(resource-scout)：本地资料处理升级为分层路由——数字资料直接转 md、扫描 PDF 交外部 OCR 管线
+  产出可检索 md＋页码映射，登记 `_sources.tsv` 并按 `_sources.tsv` 建索引
+- feat(课设/讲解)：有本地资料的科目，先按 `material-retrieval` 协议查本地库当主干依据再设计/写内容
+- docs：文件归属.md 增补本地资料来源登记与检索索引；RESOURCES.md 模板标注 digital/scan 溯源
+
+### 已知边界
+- 扫描 PDF 的 OCR 步骤挂在外部台式机管线（MinerU，手机侧 math-ocr），本 fork 只定契约不包 GPU；
+  GPU 不可达时 scan 资料标「OCR 待跑」，页码映射待管线回填。
+- 本 fork 独立演进，不复刻/不跟上游对齐。
+
+[完整比较](https://github.com/timetetng/Study-Mate/compare/v0.2.0...v0.3.0)
+<!-- /studymate-release:v0.3.0 -->
+
 <!-- studymate-release:v0.2.0 -->
 ## [0.2.0](https://github.com/Miaotofu01/Study-Mate/releases/tag/v0.2.0) - 2026-09-24
 

@@ -8,7 +8,7 @@
 - [Book/Article/Doc: 标题 by 作者](url)
   一行说明：覆盖什么、什么时候用（尤其标出"用于核对 X 的版本差异"）。只放高可信来源（官方文档、教材、公认专家、同行评审）。
 - [Local: 标题 / 教材名](reference/文件名.md)
-  一行说明：本地提供的主教材/讲义（转换后放入 reference/）；留指针供查阅与核对。
+  一行说明：本地提供的主教材/讲义（转换 **digital**，或扫描版经 OCR 的 **scan**，见 `reference/INDEX/` 的 `library.tsv` 标注）；留指针供查阅与核对，scan 的按索引页码溯源。
 - ...
 
 ## Wisdom (Communities)

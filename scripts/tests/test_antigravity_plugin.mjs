@@ -61,7 +61,7 @@ test('exported Antigravity ZIP contains complete agents, skills, and templates',
   assert.ok(fs.readFileSync(path.join(plugin, 'agents/practice-evaluator.md'), 'utf8').includes('四层练习架构'));
 
   // 3. Skills (12 skills)
-  assert.equal(fs.readdirSync(path.join(plugin, 'skills')).length, 12);
+  assert.equal(fs.readdirSync(path.join(plugin, 'skills')).length, 13);
   for (const name of fs.readdirSync(path.join(plugin, 'skills'))) {
     const skillContent = fs.readFileSync(path.join(plugin, 'skills', name, 'SKILL.md'), 'utf8');
     const fm = skillContent.match(/^---\n([\s\S]*?)\n---\n/);

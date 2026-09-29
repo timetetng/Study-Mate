@@ -19,7 +19,7 @@ const DSH_ONLY = ['~/.dsh/studymate-config.yaml', '<WS>', 'xdg-open', 'disable-m
 const REWRITTEN = ['/tmp', '<WS>', 'python3', '`cp', '`grep', 'ask_user_question', '`present`', 'xdg-open', '`read`', './run_tests.sh'];
 
 test('teaching text survives export for every skill', () => {
-  assert.equal(skills.length, 12);
+  assert.equal(skills.length, 13);
   for (const [name, content] of adapted) {
     const body = sources.get(name).replace(/^---\r?\n[\s\S]*?\r?\n---\r?\n/, '');
     const tail = body.split('\n').filter(line => line.trim())

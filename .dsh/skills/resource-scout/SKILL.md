@@ -15,10 +15,14 @@ user-invocable: false
 
 ## 怎么做
 
-0. **处理本地资料**：若总控提供了本地资料路径：
-   - 先检查本地资料，派子 agent 转成 markdown 格式，放到课程的「速查页」目录 `reference/`（如 `<subject_path>/reference/<资料名>.md`）。
+0. **处理本地资料（分层，digital / scan 两路）**：若总控提供了本地资料路径：
+   - **先按文本层分类**每份资料：能直接抽出文字/文本抽取的（文本 PDF、Markdown、TXT、HTML）→ `digital`；扫描版/无文本层（图片 PDF、扫描讲义、拍的书页）→ `scan`。
+   - **digital 路**：派子 agent 转成 markdown，放「速查页」目录 `reference/<资料名>.md`。
+   - **scan 路（OCR）**：把扫描 PDF 交给**外部 OCR 管线**（手机侧 math-ocr 的 MinerU 流水线，跑在台式机 GPU）：产出可检索 `reference/<资料名>.md`、章节行号映射、以及 `reference/INDEX/<资料名>.pages.tsv`（行号→页码）。**测得 OCR 起始页基数写进 `_sources.tsv` 的第三列**。若管线此刻不可达（台式机离线等）→ 照实写「OCR 待跑」，在 `deliver/RESOURCES.md` 记 `- [Local-OCR待跑: 教材名](reference/<资料名>.md)`，别用占位文本假装成书；总控下次可重跑。
+   - **登记来源**：把每份资料名、`digital|scan`、scan 的页码基数写进 `<subject_path>/reference/_sources.tsv`（`资料名.md<TAB>digital|scan<TAB>[页码基数]`）。
+   - **建检索索引**：资料落地后执行 `python3 <root>/scripts/build_material_index.py <subject_path>`，产出 `reference/INDEX/`（library／toc／lines／terms／offsets；scan 的 pages.tsv 由管线回填）。**跑完报规模**（资料份数 / scan 份数，方便总控复算）。
    - 同时自己并行做原先的工作（检索权威教材与官方文档、梳理版本差异与 Gaps）。
-   - 子 agent 转换完成后，在 `deliver/RESOURCES.md` 留指针指向 `reference/`（例如 `- [Local: 教材名](reference/<文件名>.md)`）。
+   - 处理完成后，在 `deliver/RESOURCES.md` 留指针指向 `reference/`（例如 `- [Local: 教材名](reference/<文件名>.md)`；scan 的标上页码基数便于定位）。
    - 若未提供本地资料路径，直接按下列步骤全网检索。
 1. **只读高可信来源**：权威教材（公认教材、经典书、同行评审材料）与官方文档（语言／框架／工具的官方站点、规范原文）。低质量博客、聚合站、AI 生成内容不进清单。
 2. **够定主干就停**，三条同时满足即收手：
@@ -39,5 +43,5 @@ user-invocable: false
 
 每条资源都必须带 `title`/`type`/`url` 三项 + 一行用途，缺一项就不算一条；稳定基础知识不必凑条目。
 
-**正文只报摘要**（别贴清单全文）：条数与两类各几条、`Gaps` 条数、写盘路径，再加 3-5 条"最该先看的"与一句"哪些站点抓不动"（下游 `image-scout` 靠这句省时间）。
+**正文只报摘要**（别贴清单全文）：条数与两类各几条、`Gaps` 条数、**本地资料份数／其中 scan 待 OCR 份数**、写盘路径，再加 3-5 条"最该先看的"与一句"哪些站点抓不动"（下游 `image-scout` 靠这句省时间）。
 

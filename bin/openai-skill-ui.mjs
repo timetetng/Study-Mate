@@ -80,6 +80,12 @@ const skills = new Map([
     short_description: '供学习总控处理课程中的局部疑问，记录误解并引导学生回到学习位置',
     default_prompt: '请用 $local-qa 的内部规范解答我在当前 StudyMate 课程中的局部疑问。',
   }],
+  ['material-retrieval', {
+    description: 'StudyMate 本地资料检索内部规范：由学习总控在课设/答疑路径按需读取，把问题映射到科目本地资料库（reference/INDEX/）的章节/行号/页码并溯源回原始出处；扫描资料的 OCR→索引输入来自 resource-scout。',
+    display_name: 'StudyMate · 本地资料检索',
+    short_description: '供学习总控和课设/讲解角色查询科目本地资料库并溯源到章节与页码',
+    default_prompt: '请用 $material-retrieval 的内部规范在当前科目的本地资料库中检索并溯源到原文章节与页码。',
+  }],
 ]);
 
 /** Unknown skills keep their original discovery description. */
